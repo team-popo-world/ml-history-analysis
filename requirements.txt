@@ -1,0 +1,28 @@
+# 핵심 Hugging Face 패키지들 (최신 버전 사용)
+# git+https://github.com/huggingface/transformers.git
+# git+https://github.com/huggingface/peft.git
+# git+https://github.com/huggingface/accelerate.git
+
+# 🔹 PyTorch (CUDA 11.8 기준, 환경에 맞게 조절 가능)
+torch
+
+# 양자화 실행을 위한 bitsandbytes (CUDA 필요)
+bitsandbytes
+
+# Jupyter 노트북 실행용 (선택사항)
+notebook
+ipykernel
+ipywidgets
+tqdm
+ipykernel
+
+# 속도 개선 (선택사항)
+huggingface_hub[hf_xet]
+
+# gpt 사용
+dotenv
+python-dotenv
+langchain_openai
+
+pymongo
+sqlalchemy
