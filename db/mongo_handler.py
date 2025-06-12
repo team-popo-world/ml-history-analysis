@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 
 load_dotenv(override=True)
 
-def load_mongo_data():
+def load_mongo_data(fields=None):
     # MongoDB 연결 정보
     uri = os.getenv("MONGO_URI")
     db_name = os.getenv("MONGO_DB_NAME")
@@ -15,21 +15,13 @@ def load_mongo_data():
     db = client[db_name]
     collection = db[collection_name]
 
-    df = pd.DataFrame(list(collection.find()))
+    # projection 설정
+    if fields:
+        projection = {field: 1 for field in fields}
+        projection['_id'] = 0  # _id는 제외
+    else:
+        projection = None  # 전체 컬럼 가져옴
 
-    ### 나중에 삭제될 코드 ###
-    df.rename(columns={'childId': 'userId'}, inplace=True)
-    ########################
+    df = pd.DataFrame(list(collection.find({}, projection)))
 
-    df['riskLevel'] = df['riskLevel'].replace({
-        '고위험 고수익': 'high',
-        '균형형': 'mid',
-        '장기 안정형': 'low'
-    })
-
-    df.sort_values(by=['investSessionId', 'riskLevel', 'turn'], inplace=True)
-    df['deltaShares'] = df.groupby(['investSessionId', 'riskLevel'])['numberOfShares'].diff()
-    df['deltaShares'] = df['deltaShares'].fillna(df['numberOfShares'])
-    df['deltaShares'] = df['deltaShares'].astype(int)
-    
     return df
