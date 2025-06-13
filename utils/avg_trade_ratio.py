@@ -5,6 +5,8 @@ import pandas as pd
 def avg_trade_ratio(df):
     # 구매 데이터 생성
     transcation_df = df[['investSessionId',
+                        'userId',
+                        'age',
                         'turn',
                         'riskLevel',
                         'numberOfShares',
@@ -43,15 +45,20 @@ def avg_trade_ratio(df):
 
     # buy_ratio_pivot: 열로 riskLevel을 펼치기  
     buy_ratio_pivot = buy_sell_counts.pivot(index='investSessionId', columns='riskLevel', values='buyRatio')
+    buy_ratio_pivot = buy_ratio_pivot.fillna(0)
     buy_ratio_pivot.columns = [f"{level}BuyRatio" for level in buy_ratio_pivot.columns]
     buy_ratio_pivot.reset_index(inplace=True)
 
     # sell_ratio pivot: 열로 riskLevel을 펼치기
     sell_ratio_pivot = buy_sell_counts.pivot(index='investSessionId', columns='riskLevel', values='sellRatio')
+    sell_ratio_pivot = sell_ratio_pivot.fillna(0)
     sell_ratio_pivot.columns = [f"{level}SellRatio" for level in sell_ratio_pivot.columns]
     sell_ratio_pivot.reset_index(inplace=True)
 
     # merge 두 pivot
     avgTradeRatio = pd.merge(buy_ratio_pivot, sell_ratio_pivot, on='investSessionId')
+
+    user_info = transcation_df.groupby('investSessionId')[['userId', 'age']].first().reset_index()
+    avgTradeRatio = avgTradeRatio.merge(user_info, on='investSessionId', how='left')
 
     return avgTradeRatio

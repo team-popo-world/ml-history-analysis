@@ -1,10 +1,19 @@
 # 구매 배팅 성공률
 # = tag 뉴스 발생 턴에서 해당 종목 구매 후 다음 턴에서 가격이 증가한 횟수 / 
 # / tag 뉴스 발생 턴에서 해당 종목을 구매한 횟수
+import pandas as pd
 
 def bet_buy_ratio(df):
     # 구매 베팅 성공
-    bet_win = df[["investSessionId","turn","newsTag","riskLevel","beforeValue","currentValue", "transactionType"]].copy()
+    bet_win = df[["investSessionId",
+                  "userId",
+                  "age",
+                  "turn",
+                  "newsTag",
+                  "riskLevel",
+                  "beforeValue",
+                  "currentValue", 
+                  "transactionType"]].copy()
 
     # 다음 턴의 value 컬럼 구하기
     bet_win.sort_values(by=["investSessionId","riskLevel","turn"], inplace=True)
@@ -28,5 +37,8 @@ def bet_buy_ratio(df):
 
     # 필요없는 컬럼 삭제
     bet_buy_df.drop(columns=["bet_buy_total","bet_buy_win"], inplace=True)
+
+    user_info = df.groupby("investSessionId")[["userId", "age"]].first().reset_index()
+    bet_buy_df = pd.merge(bet_buy_df, user_info, on="investSessionId", how="left")
     
     return bet_buy_df
