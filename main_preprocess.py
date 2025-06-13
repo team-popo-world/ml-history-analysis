@@ -28,6 +28,8 @@ print(betSellRatio.head())
 betShares = bet_shares(df)
 print(betShares.head())
 
+# 나이, 성별 꼭 붙여줘야함!!
+
 # 결과 출력
 # print(mongo_df.head())
 # print("#################################")
