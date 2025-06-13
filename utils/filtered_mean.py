@@ -1,11 +1,17 @@
 
 import pandas as pd
 
-def filtered_mean(df, col, childId):
+def filtered_mean(df, col, userId):
 
-    col_mean = df.groupby("age")[f"{col}"].mean()
-    df[f'{col}Mean'] = df['age'].map(col_mean)
+    # 우리 아이랑 같은 나이를 갖는 행만 필터링
+    child_age = df.loc[df["userId"]==userId, "age"] 
+    df = df[df["age"] == child_age]
 
-    filtered_df = df[df["childId"]==childId]
+    # 우리아이 나이대 평균
+    col_mean = df[f"{col}"].mean()
+    df[f'{col}Mean'] = col_mean
+
+    # 우리아이 데이터만 필터링
+    filtered_df = df[df["userId"]==userId]
 
     return filtered_df
