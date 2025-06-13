@@ -14,7 +14,7 @@ def load_postgres_data():
         password=os.getenv("DB_PASSWORD")
     )
 
-    seed_query = "SELECT chapter_id, seed_money FROM invest_chapter;"
+    seed_query = "SELECT chapter_id, seed_money FROM invest_chapter ;"
     user_query = "SELECT user_id, sex, age FROM users;"
 
     seed_df = pd.read_sql(seed_query, conn)
