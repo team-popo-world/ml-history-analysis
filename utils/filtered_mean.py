@@ -1,4 +1,3 @@
-
 import pandas as pd
 
 def filtered_mean(df, col, userId):
