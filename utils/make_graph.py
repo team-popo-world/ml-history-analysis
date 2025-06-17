@@ -30,7 +30,7 @@ def make_df_graph1(userId, filter: bool = False):
     df2 = tag_avg_stay_time(df)
     df2 = filtered_mean(df2, "tagAvgStayTime", userId)
 
-    fin_df = pd.merge(df1, df2, on="investSessionId", how="inner")
+    fin_df = pd.merge(df1, df2, on=["investSessionId", "userId"], how="inner")
 
     return fin_df
 
@@ -49,7 +49,8 @@ def make_df_graph2_1(userId, filter: bool = False):
         filter_date(df)
 
     df = avg_buy_ratio(df)
-    df = df.loc[df["userId"] == userId, ["userId","investSessionId","highBuyRatio","midBuyRatio","lowBuyRatio"]]
+    df = filtered_mean(df, "avgBuyRatio", userId)
+    # df = df.loc[df["userId"] == userId, ["userId","investSessionId","highBuyRatio","midBuyRatio","lowBuyRatio"]]
 
     return df
 
@@ -68,7 +69,8 @@ def make_df_graph2_2(userId, filter: bool = False):
         filter_date(df)
     
     df = avg_sell_ratio(df)
-    df = df.loc[df["userId"] == userId, ["userId","investSessionId","highSellRatio","midSellRatio","lowSellRatio"]]
+    df = filtered_mean(df, "avgSellRatio", userId)
+    # df = df.loc[df["userId"] == userId, ["userId","investSessionId","highSellRatio","midSellRatio","lowSellRatio"]]
     
     return df
 
@@ -133,13 +135,16 @@ def make_df_graph3(userId, filter: bool = False):
             "transactionType"]
     df = load_df(col=cols, use_seed=False)
 
+    if filter:
+        filter_date(df)
+
     df1 = bet_buy_ratio(df)
     df1 = filtered_mean(df1, "betBuyRatio", userId)
 
     df2 = bet_sell_ratio(df)
     df2 = filtered_mean(df2, "betSellRatio", userId)
 
-    fin_df = pd.merge(df1, df2, on="investSessionId", how="outer")
+    fin_df = pd.merge(df1, df2, on=["investSessionId", "userId"], how="outer")
 
     return fin_df
 
@@ -152,6 +157,9 @@ def make_df_graph4(userId, filter: bool = False):
             "startedAt",
             'currentPoint']
     df = load_df(col=cols, use_seed=True)
+
+    if filter:
+        filter_date(df)
 
     df = avg_cash_ratio(df)
     df = filtered_mean(df, "avgCashRatio", userId)

@@ -13,4 +13,7 @@ def filtered_mean(df, col, userId):
     # 우리아이 데이터만 필터링
     filtered_df = df[df["userId"]==userId]
 
+    # age 컬럼 제거??
+    filtered_df = filtered_df.drop(columns="age")
+
     return filtered_df

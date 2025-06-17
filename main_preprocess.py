@@ -10,30 +10,39 @@ from utils.bet_sell_ratio import bet_sell_ratio
 from utils.bet_shares import bet_shares
 from models.RandomForest import random_forest, rf_predict_invest_type
 
-df = load_df(use_seed=True)
+df = load_df("invest", use_seed=True)
 print(df.head())
 
 # Preprocessing
 userInfo = df[['userId', 'sex', 'age']].copy()
 print("#########3UserInfo##########", userInfo)
+
 tradingTurn = trading_turn(df)
 print(tradingTurn.head())
+
 transactionNum = transaction_num(df)
 print(transactionNum.head())
+
 avgCashRatio = avg_cash_ratio(df)
 print(avgCashRatio.head())
+
 avgStayTime = avg_stay_time(df)
 print(avgStayTime.head())
+
 buy = avg_buy_ratio(df)
 sell = avg_sell_ratio(df)
 avgTradeRatio = avg_trade_ratio(df, buy, sell)
 print(avgTradeRatio.head())
+
 tagAvgStayTime = tag_avg_stay_time(df)
 print(tagAvgStayTime.head())
+
 betBuyRatio = bet_buy_ratio(df)
 print(betBuyRatio.head())
+
 betSellRatio = bet_sell_ratio(df)
 print(betSellRatio.head())
+
 betShares = bet_shares(df)
 print(betShares.head())
 
