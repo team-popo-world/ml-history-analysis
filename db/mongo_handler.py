@@ -15,13 +15,6 @@ def load_mongo_data(fields=None):
     db = client[db_name]
     collection = db[collection_name]
 
-    # projection 설정
-    if fields:
-        projection = {field: 1 for field in fields}
-        projection['_id'] = 0  # _id는 제외
-    else:
-        projection = None  # 전체 컬럼 가져옴
-
-    df = pd.DataFrame(list(collection.find({}, projection)))
+    df = pd.DataFrame(list(collection.find()))
 
     return df

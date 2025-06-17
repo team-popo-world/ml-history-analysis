@@ -1,7 +1,7 @@
 # 위험 감수율 #
 # betMidShares: 중위험 tag 발생 시 중위험 종목 구매 수량
 # betHighShares: 고위험 tag 발생 시 중위험 종목 구매 수량
-
+import pandas as pd
 
 def bet_shares(df):
     bet_data = df[["investSessionId","turn","newsTag","riskLevel","numberOfShares","deltaShares", "transactionType", "beforeValue","currentValue","income"]].copy()
