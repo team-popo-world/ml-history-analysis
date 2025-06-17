@@ -9,7 +9,7 @@ def tag_avg_stay_time(df):
                         'endedAt']].drop_duplicates()
 
     tag_turn_df = tag_turn_df[tag_turn_df['newsTag'] != "all"]
-    tag_turn_df["turnDuration"] = tag_turn_df["endedAt"] = tag_turn_df["startedAt"]
+    tag_turn_df["turnDuration"] = tag_turn_df["endedAt"] - tag_turn_df["startedAt"]
     tagAvgStayTime = tag_turn_df.groupby(["investSessionId", 'userId', 'age'])["turnDuration"].mean().reset_index().rename(columns={"turnDuration":"tagTrunDuraion"})
 
     return tagAvgStayTime

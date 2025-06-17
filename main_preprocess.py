@@ -3,33 +3,39 @@ from utils.trading_turn import trading_turn
 from utils.transaction_num import transaction_num
 from utils.avg_cash_ratio import avg_cash_ratio
 from utils.avg_stay_time import avg_stay_time
-from utils.avg_trade_ratio import avg_trade_ratio
+from utils.avg_trade_ratio import avg_trade_ratio, avg_buy_ratio, avg_sell_ratio
 from utils.tag_avg_stay_time import tag_avg_stay_time
 from utils.bet_buy_ratio import bet_buy_ratio
 from utils.bet_sell_ratio import bet_sell_ratio
 from utils.bet_shares import bet_shares
 from models.RandomForest import random_forest, rf_predict_invest_type
 
-df = load_df()
+df = load_df(use_seed=True)
 print(df.head())
 
 # Preprocessing
 userInfo = df[['userId', 'sex', 'age']].copy()
 print("#########3UserInfo##########", userInfo)
 tradingTurn = trading_turn(df)
+print(tradingTurn.head())
 transactionNum = transaction_num(df)
+print(transactionNum.head())
 avgCashRatio = avg_cash_ratio(df)
+print(avgCashRatio.head())
 avgStayTime = avg_stay_time(df)
-# print(avgStayTime.head())
-avgTradeRatio = avg_trade_ratio(df)
+print(avgStayTime.head())
+buy = avg_buy_ratio(df)
+sell = avg_sell_ratio(df)
+avgTradeRatio = avg_trade_ratio(df, buy, sell)
+print(avgTradeRatio.head())
 tagAvgStayTime = tag_avg_stay_time(df)
-# print(tagAvgStayTime.head())
+print(tagAvgStayTime.head())
 betBuyRatio = bet_buy_ratio(df)
-# print(betBuyRatio.head())
+print(betBuyRatio.head())
 betSellRatio = bet_sell_ratio(df)
-# print(betSellRatio.head())
+print(betSellRatio.head())
 betShares = bet_shares(df)
-# print(betShares.head())
+print(betShares.head())
 
 # 결과 출력
 # print(mongo_df.head())

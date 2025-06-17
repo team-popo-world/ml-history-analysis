@@ -30,4 +30,4 @@ class InputData(BaseModel):
 def predict(data: InputData):
     input_df = pd.DataFrame([data.dict()])  # 한 개 데이터만 처리
     prediction = model.predict(input_df)
-    return {"predicted_investType": prediction[0]}s
+    return {"predicted_investType": prediction[0]}

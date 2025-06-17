@@ -6,10 +6,12 @@ def avg_cash_ratio(df):
               'seedMoney',
             'chapterId',
             'turn',
-            'currentPoint']]
+            'currentPoint']].copy()
 
-    acr = acr.groupby(['investSessionId', 'userId', 'age', 'seedMoney', 'chapterId', 'turn'])['currentPoint'].mean().reset_index(name='avgCurrentValue')
+    acr = acr.groupby(['investSessionId', 'userId', 'age', 'seedMoney', 'chapterId'])['currentPoint'].mean().reset_index(name='avgCurrentValue')
+    
     acr['diff'] = acr['seedMoney'] - acr['avgCurrentValue']
-    averageCashRatio = acr.groupby(['investSessionId', 'userId', 'age'])['diff'].mean().reset_index(name="avgDiff")
+    acr["avgCashRatio"] = acr["diff"] / acr["seedMoney"]
+    averageCashRatio = acr[['investSessionId', 'userId', 'age', 'avgCashRatio']].copy()
         
     return averageCashRatio
