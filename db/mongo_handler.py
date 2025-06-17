@@ -21,8 +21,6 @@ def binary_to_uuid_string(binary_uuid):
 
 # 불러온 mongoDB 전처리
 def mongo_preprocess(df):
-    df.rename(columns={'childId':'userId'}, inplace=True)
-
     # childId(또는 userId) 컬럼의 Binary를 문자열 UUID로 변환
     """
     if 'childId' in df.columns:

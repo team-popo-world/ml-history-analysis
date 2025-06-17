@@ -1,7 +1,9 @@
 import os
+from sqlalchemy import create_engine
 import pandas as pd
 import psycopg2
 from dotenv import load_dotenv
+from urllib.parse import quote_plus
 
 load_dotenv(override=True)
 
@@ -11,12 +13,14 @@ def snake_to_camel(s):
     return parts[0] + ''.join(word.capitalize() for word in parts[1:])
 
 def load_postgres_data(query: str):
-    conn = psycopg2.connect(
-        host=os.getenv("DB_HOST"),
-        port=os.getenv("DB_PORT"),
-        dbname=os.getenv("DB_NAME"),
-        user=os.getenv("DB_USER"),
-        password=os.getenv("DB_PASSWORD")
+    host=os.getenv("DB_HOST")
+    port=os.getenv("DB_PORT")
+    dbname=os.getenv("DB_NAME")
+    user=os.getenv("DB_USER")
+    password=quote_plus(os.getenv("DB_PASSWORD"))
+
+    engine = create_engine(
+    f"postgresql+psycopg2://{user}:{password}@{host}:{port}/{dbname}"
     )
 
     # seed_query = "SELECT chapter_id, seed_money FROM invest_chapter ;"
@@ -25,9 +29,7 @@ def load_postgres_data(query: str):
     # seed_df = pd.read_sql(seed_query, conn)
     # user_df = pd.read_sql(user_query, conn)
 
-    df = pd.read_sql(query, conn)
-
-    conn.close()
+    df = pd.read_sql(query, engine)
 
     df.columns = [snake_to_camel(col) for col in df.columns]
     # seed_df.rename(columns={'chapter_id': 'chapterId'}, inplace=True)
