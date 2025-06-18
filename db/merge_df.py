@@ -3,6 +3,7 @@ from db.postgres_handler import load_postgres_data
 
 def load_df(col: list = None, collection: str = "invest",  use_seed: bool = False):
     # MongoDB
+    print(col)
     mongo_df = load_mongo_data(col, collection)
     print("laod_df내부에 있는 mongo_db", mongo_df.head())
 
@@ -21,8 +22,14 @@ def load_df(col: list = None, collection: str = "invest",  use_seed: bool = Fals
 
     print("laod_df내부에 있는 seed + mongo", merge.head())
 
+    ### user_df에 있는 userId가 uuid로 출력됨 -> str타입으로 바꿔서 출력
+    user_df['userId'] = user_df['userId'].astype(str)
+
+    print("🔍 merge 컬럼 목록:", merge.columns)
+    print("🔍 user_df 컬럼 목록:", user_df.columns)
+
     merged_df = merge.merge(user_df, on="userId", how="inner")
-    print(user_df.head())
+    print("load_df내부에 있는 최종 merge_df", merged_df.head())
 
     return merged_df
 
