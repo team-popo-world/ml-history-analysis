@@ -4,7 +4,7 @@ def transaction_num(df):
           'turn',
           'riskLevel',
           'plusClick',
-          'minusClick']]
+          'minusClick']].copy()
 
     nt['click'] = nt['plusClick'] + nt['minusClick']
     transactionNum = nt.groupby('investSessionId')[['click']].mean().reset_index()

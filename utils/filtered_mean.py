@@ -2,7 +2,6 @@ import pandas as pd
 
 def filtered_mean(df, col, userId):
 
-<<<<<<< HEAD
     # 우리 아이랑 같은 나이를 갖는 행만 필터링
     child_age = df.loc[df["userId"]==userId, "age"] 
     df = df[df["age"] == child_age]
@@ -13,12 +12,8 @@ def filtered_mean(df, col, userId):
 
     # 우리아이 데이터만 필터링
     filtered_df = df[df["userId"]==userId]
-=======
-    col_mean = df.groupby("age")[f"{col}"].mean()
-    df[f'{col}Mean'] = df['age'].map(col_mean)
 
-    filtered_df = df[df["childId"]==userId]
-    filtered_df.drop(columns="age", inplace=True)
->>>>>>> 3a638d832466262e71b6e1cce3a9f0eb8aec9ac5
+    # age 컬럼 제거??
+    filtered_df = filtered_df.drop(columns="age")
 
     return filtered_df
