@@ -13,7 +13,8 @@ def bet_buy_ratio(df):
                   "riskLevel",
                   "beforeValue",
                   "currentValue", 
-                  "transactionType"]].copy()
+                  "transactionType",
+                  "startedAt"]].copy()
 
     # 다음 턴의 value 컬럼 구하기
     bet_win.sort_values(by=["investSessionId","riskLevel","turn"], inplace=True)
@@ -38,7 +39,11 @@ def bet_buy_ratio(df):
     # 필요없는 컬럼 삭제
     bet_buy_df.drop(columns=["bet_buy_total","bet_buy_win"], inplace=True)
 
-    user_info = df.groupby("investSessionId")[["userId", "age"]].first().reset_index()
+    # ✅ sessionId별 첫 turn 기준 startedAt 추출
+    first_turn_info = df.sort_values(by=["investSessionId", "turn"]).groupby("investSessionId").first().reset_index()
+    user_info = first_turn_info[["investSessionId", "userId", "age", "startedAt"]]
+
+    user_info = df.groupby(["investSessionId", "userId"])[["startedAt", "age"]].first().reset_index()
     bet_buy_df = pd.merge(bet_buy_df, user_info, on="investSessionId", how="left")
     
     return bet_buy_df
