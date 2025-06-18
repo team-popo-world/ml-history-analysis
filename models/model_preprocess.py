@@ -18,11 +18,13 @@ def model_preprocess():
     encoding_cols = ["userId", "sex","chapterId", "investPro"]
     df, encoders_dict, label_mappings  = label_encoder(df, encoding_cols) # 인코더 객체, 인코딩 매핑
 
-    # 결측치 확인
-    print(df.isna().sum())
 
     # investSessionId 삭제
-    df.drop("investSessionId", inplace=True)
+    df.drop("investSessionId", axis=1, inplace=True)
+
+    
+    # 결측치 확인
+    #print(df.isna().sum())
     
     return df
 

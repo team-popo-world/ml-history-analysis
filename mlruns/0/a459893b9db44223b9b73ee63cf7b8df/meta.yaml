@@ -1,0 +1,14 @@
+artifact_uri: mlflow-artifacts:/0/a459893b9db44223b9b73ee63cf7b8df/artifacts
+end_time: 1750266894062
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: a459893b9db44223b9b73ee63cf7b8df
+run_name: kindly-fox-674
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1750266884655
+status: 3
+tags: []
+user_id: garch

@@ -1,0 +1,20 @@
+digest: 700edab4
+name: dataset
+profile: '{"num_rows": 750, "num_elements": 14250}'
+schema: '{"mlflow_colspec": [{"type": "integer", "name": "userId", "required": true},
+  {"type": "integer", "name": "sex", "required": true}, {"type": "long", "name": "age",
+  "required": true}, {"type": "integer", "name": "chapterId", "required": true}, {"type":
+  "long", "name": "avgNotKeep", "required": true}, {"type": "long", "name": "click",
+  "required": true}, {"type": "double", "name": "avgCashRatio", "required": true},
+  {"type": "double", "name": "avgStayTime", "required": true}, {"type": "double",
+  "name": "highBuyRatio", "required": true}, {"type": "double", "name": "lowBuyRatio",
+  "required": true}, {"type": "double", "name": "midBuyRatio", "required": true},
+  {"type": "double", "name": "highSellRatio", "required": true}, {"type": "double",
+  "name": "lowSellRatio", "required": true}, {"type": "double", "name": "midSellRatio",
+  "required": true}, {"type": "double", "name": "tagTrunDuraion", "required": true},
+  {"type": "long", "name": "betMidShares", "required": true}, {"type": "long", "name":
+  "betHighShares", "required": true}, {"type": "double", "name": "betBuyRatio", "required":
+  true}, {"type": "double", "name": "betSellRatio", "required": true}]}'
+source: '{"tags": {"mlflow.user": "garch", "mlflow.source.name": "models/Train.py",
+  "mlflow.source.type": "LOCAL"}}'
+source_type: code
