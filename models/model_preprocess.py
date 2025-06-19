@@ -7,7 +7,7 @@ from preprocessing.label_encoder import label_encoder
 def model_preprocess():
 
     # 데이터 불러오기
-    df = pd.read_csv(".\models\invest_dummy.csv")
+    df = pd.read_csv(".\data\invest_dummy.csv")
 
     #df = userId_drop(df1)
 

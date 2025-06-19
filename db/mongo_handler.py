@@ -7,6 +7,7 @@ load_dotenv(override=True)
 
 collection_map = {
     "invest": "INVEST_HISTORY",
+    "invest_dummy": "INVEST_HISTORY_DUMMY",
     "quest": "QUEST_HISTORY",
     "saving_account": "SAVING_ACCOUNT_HISTORY"
 }
