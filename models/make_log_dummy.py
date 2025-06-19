@@ -12,49 +12,95 @@ RISK_LEVELS = ["고위험 고수익", "중위험 균형형", "저위험 저수�
 INVESTMENT_TYPES = ["안정형", "안정추구형", "위험중립형", "적극투자형", "공격투자형"]
 NEWS_TAGS = ["all", "high", "mid"]
 TRANSACTION_TYPES = ["BUY", "SELL", "KEEP"]
+SCENARIO_ID = {'1111': ['cf5096fc-f688-48de-a7f5-0e1da42427d2',
+  'fa384163-cc57-45d4-ae42-d233b987cc08',
+  'a2be0f02-14c4-4a10-9c49-cbbac74bee08',
+  '70ea61da-70d3-42b7-bccf-b24c5ed27fa4',
+  'e4d301f5-cfc9-41b0-9caf-d713fe7361c8',
+  '3242f82b-0bd2-4f9a-9b21-5ccfa0ffc25c',
+  'c04d0415-eee8-4fc9-8e87-1d91ce6cbaea',
+  '97ad7e42-3675-4e27-b9d5-be0a8e6a9981',
+  'af12c58d-f3c1-450b-bd79-e22e080d261f',
+  '3cf01464-fd5b-445e-9c47-b65046af5a04',
+  'df694cd0-efbe-4b38-b332-0ff82a885afb',
+  'd31b4f13-be8f-4e05-a8ac-b3f8fc4c711b',
+  'eab5bd7d-49f3-45b2-98da-ca6efce926e0',
+  'ca0163d3-a9dc-49f9-a7eb-439cdcc99259',
+  '7548eaac-69bc-4883-b302-331f25c97928',
+  '90847083-c09a-4e38-aa67-f07502418e98',
+  '21fb2f09-4303-4d7f-abfe-e4f01d604fbc',
+  'aeeb2ad0-5768-48af-a858-602ca9b486cc',
+  '75fa7fd3-b2ef-45c5-b518-e5b5ae8981bd',
+  'd6474e0e-9b85-44ac-aaeb-04a4396804c5',
+  'b534c0b1-5130-4e3c-961e-1c58b4b1ff39',
+  '01e9154f-716a-4bdf-bbc1-dffc5bbc5305',
+  '8da28cf2-22c1-438b-a169-71f33408fde2'],
+ '2222': ['eac53c18-0503-4859-8f28-f916b84fb2d2',
+  '76ffeedd-674e-4f99-b783-234d543d98b4',
+  'd0fa81a4-54e0-48b7-917f-3f997761fc75',
+  '89565e93-67b1-45e9-8a9d-f8e5a0a7f41d',
+  '57886c1a-07cb-48fe-9588-bc3171e4ca78',
+  '6663e9ec-eed8-4cfc-8aeb-29ff973f6b88',
+  '9736f068-e577-480e-bfb4-633f732d6047',
+  'e7f634f8-3a4a-433d-9a3d-b945da07e777',
+  '643d9f57-86cd-415d-9da3-8a6ffba84c15',
+  'd1400232-7632-4700-a2ed-108043b95b62',
+  '407273a5-6dc8-41e7-b5f0-80acbe5c17d1'],
+ '3333': ['eb9100dc-3e3f-4f68-ba9f-e47d57d2ca5f',
+  'd784e15f-3d18-4065-831b-8b9854771dae',
+  'a3b86127-568d-4a46-a749-9666591827ae',
+  '2f0a61ae-d4f5-4618-8fa0-b3f1ce82a324',
+  'fb0406a3-bf07-44f3-a365-50a584285322',
+  '915ab338-4315-47fe-b3c3-e79f0ac2d836',
+  '7bda23f1-81b4-4719-8d73-c6b3f86f84f4',
+  'ad3ddc52-e115-41cc-9b17-a1fbf2064d2f',
+  '7ec6c655-8b78-4dc1-bce4-579a7e83bc61'],
+ '4444': ['1510c2f4-92d0-4eae-9d60-2b084a7ded45']}
+
 
 # 사용자 ID 목록 (첨부된 CSV 파일 기반)
 USER_IDS = [
-    "d97a07eb-8dd9-4cbe-a4c4-8c61017ada71",
-    "b650347b-cdaf-4248-bd63-7c16ace78286",
-    "d0a188a3-e24e-4772-95f7-07e59ce8885e",
-    "da3466ac-984a-4a19-af87-f28e4d76cf1f",
-    "8dd27193-ae74-42ce-913f-c400bddcb4e8",
-    "54c3318f-57ef-47a4-bc51-7b470e476e7d",
-    "da35e508-de86-44f7-b7bf-ebffd85a3b5c",
-    "f0220d43-513a-4619-973d-4ed84a42bf6a",
-    "956f51a8-d6a0-4a12-a22b-9da3cdffc879",
-    "5bda4ade-431a-47ef-a62c-7bd895ece820",
-    "fd966d82-9b94-4565-a3a6-ce3df23f69a8",
-    "3ed8a159-adb0-4380-a648-e015cb82690a",
-    "237aac1b-4d6f-4ca9-9e4f-30719ea5967d",
-    "a79d7ff7-ed5e-4e8a-be4e-5b0b2c230d83",
-    "160c52d9-fb17-4d67-a2af-6bed345f7ca5",
-    "d4af0657-f9db-40ff-babd-68681db7ddeb",
-    "32803480-6b17-4d83-81b2-4684e033b9d2",
-    "f63ae87c-32e3-471e-99ff-feb60ec50760",
-    "d84bdd45-4ff2-41bc-9641-69ec3089175b",
-    "fa975c93-78ec-49c6-b60f-e70435f18c34",
-    "2bf33509-f117-49b9-98fb-89cdaab60408",
-    "c97b6d89-23b9-4216-af10-e22d6c44f1d1",
-    "bab047ff-e121-494a-855b-62fc714e0300",
-    "2617b0f9-026b-469b-a7ed-2489f37e3e5f",
-    "4e6e7fc1-fe03-41d5-8f02-0766a377bf31",
-    "2d0cd3c8-768f-4578-9d70-929e873abb29",
-    "5cf29ca0-65ad-45df-94af-1d625c45ed74",
-    "d7fbb0db-1929-4140-9b64-58d1659d9b3e",
-    "c929fc99-3407-4e67-b9bb-fe19745c61b8",
-    "22b19e79-5822-46f9-8e3f-7e55e751f9dc"
-]
+    'd97a07eb-8dd9-4cbe-a4c4-8c61017ada71',
+    'b650347b-cdaf-4248-bd63-7c16ace78286',
+    'c929fc99-3407-4e67-b9bb-fe19745c61b8',
+    'd7fbb0db-1929-4140-9b64-58d1659d9b3e',
+    '5cf29ca0-65ad-45df-94af-1d625c45ed74',
+    '2d0cd3c8-768f-4578-9d70-929e873abb29',
+    '4e6e7fc1-fe03-41d5-8f02-0766a377bf31',
+    '2617b0f9-026b-469b-a7ed-2489f37e3e5f',
+    'bab047ff-e121-494a-855b-62fc714e0300',
+    'c97b6d89-23b9-4216-af10-e22d6c44f1d1',
+    '2bf33509-f117-49b9-98fb-89cdaab60408',
+    'fa975c93-78ec-49c6-b60f-e70435f18c34',
+    'd84bdd45-4ff2-41bc-9641-69ec3089175b',
+    'f63ae87c-32e3-471e-99ff-feb60ec50760',
+    '32803480-6b17-4d83-81b2-4684e033b9d2',
+    'd4af0657-f9db-40ff-babd-68681db7ddeb',
+    '160c52d9-fb17-4d67-a2af-6bed345f7ca5',
+    'a79d7ff7-ed5e-4e8a-be4e-5b0b2c230d83',
+    '237aac1b-4d6f-4ca9-9e4f-30719ea5967d',
+    '3ed8a159-adb0-4380-a648-e015cb82690a',
+    'fd966d82-9b94-4565-a3a6-ce3df23f69a8',
+    '5bda4ade-431a-47ef-a62c-7bd895ece820',
+    '956f51a8-d6a0-4a12-a22b-9da3cdffc879',
+    'f0220d43-513a-4619-973d-4ed84a42bf6a',
+    'da35e508-de86-44f7-b7bf-ebffd85a3b5c',
+    '54c3318f-57ef-47a4-bc51-7b470e476e7d',
+    '8dd27193-ae74-42ce-913f-c400bddcb4e8',
+    'd0a188a3-e24e-4772-95f7-07e59ce8885e',
+    'da3466ac-984a-4a19-af87-f28e4d76cf1f',
+    '22b19e79-5822-46f9-8e3f-7e55e751f9dc',
+    '8d8a3d15-4058-4e07-8ac6-2089f7f4c459'
+ ]
+
 
 def generate_binary_id():
-    """MongoDB ObjectId 형태의 바이너리 ID 생성"""
-    return {
-        "$binary": {
-            "base64": base64.b64encode(os.urandom(12)).decode('utf-8'),
-            "subType": "03"
-        }
-    }
+    """UUID 형태의 문자열 ID 생성"""
+    # 16바이트 랜덤 데이터 생성
+    random_bytes = os.urandom(16)
+    # UUID 객체로 변환 후 문자열로 반환
+    uuid_str = str(uuid.UUID(bytes=random_bytes))
+    return uuid_str
 
 def calculate_stock_value(initial_value, turn, news_tag, risk_level, investment_type):
     """뉴스 태그와 투자 성향에 따른 주식 가치 계산"""
@@ -130,6 +176,7 @@ def generate_game_session():
     chapter_id = random.choice(CHAPTERS)
     user_id = random.choice(USER_IDS)
     investment_type = random.choice(INVESTMENT_TYPES)
+    scenario_id = random.choice(SCENARIO_ID[chapter_id])
     
     # 게임 시작 시간
     base_time = datetime.now() - timedelta(days=random.randint(1, 365))
@@ -223,6 +270,7 @@ def generate_game_session():
                 "_id": generate_binary_id(),
                 "investSessionId": session_id,
                 "chapterId": chapter_id,
+                "scenarioId": scenario_id,
                 "userId": user_id,
                 "turn": turn,
                 "riskLevel": risk_level,
