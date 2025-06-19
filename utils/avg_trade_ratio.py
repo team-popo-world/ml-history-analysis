@@ -106,7 +106,7 @@ def avg_trade_ratio(buy, sell):
     
     # merge 두 pivot
     avgTradeRatio = pd.merge(buy, sell, on=["investSessionId", "userId", "age", "startedAt"])
-    avgTradeRatio.drop(columns="startedAt", inplace=True)
+    # avgTradeRatio.drop(columns="startedAt", inplace=True)
     print("avgTradeRatio", avgTradeRatio)
     # user_info = transcation_df.groupby(["investSessionId", "userId"])['age'].first().reset_index()
     # avgTradeRatio = avgTradeRatio.merge(user_info, on=["investSessionId", "userId", "age"], how='left')

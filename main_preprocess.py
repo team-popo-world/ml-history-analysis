@@ -8,7 +8,6 @@ from utils.tag_avg_stay_time import tag_avg_stay_time
 from utils.bet_buy_ratio import bet_buy_ratio
 from utils.bet_sell_ratio import bet_sell_ratio
 from utils.bet_shares import bet_shares
-from models.RandomForest import random_forest, rf_predict_invest_type
 
 df = load_df(None, "invest", True)
 print(df.head())

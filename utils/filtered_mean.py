@@ -4,6 +4,7 @@ def filtered_mean(df, col, userId):
 
     # 우리 아이 나이 추출 (단일 값으로)
     child_age_series = df.loc[df["userId"] == userId, "age"]
+    
     if child_age_series.empty:
         raise ValueError(f"userId '{userId}'에 해당하는 age 정보가 없습니다.")
 

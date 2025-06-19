@@ -1,6 +1,6 @@
 import mlflow
 import pandas as pd
-from model_preprocess import model_preprocess
+from models.model_preprocess import model_preprocess
 from sklearn.model_selection import train_test_split
 #from sklearn.tree import DecisionTreeClassifier
 from sklearn.ensemble import RandomForestClassifier

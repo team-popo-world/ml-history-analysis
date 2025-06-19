@@ -7,15 +7,13 @@ load_dotenv(override=True)
 
 collection_map = {
     "invest": "INVEST_HISTORY",
+    "invest_dummy": "INVEST_HISTORY_DUMMY",
     "quest": "QUEST_HISTORY",
     "saving_account": "SAVING_ACCOUNT_HISTORY"
 }
 
 # 불러온 mongoDB 전처리
 def mongo_preprocess(df):
-    if 'childId' in df.columns:
-        df.rename(columns={'childId': 'userId'}, inplace=True)
-
     if 'userId' in df.columns:
         df['userId'] = df['userId'].astype(str)
 

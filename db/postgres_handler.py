@@ -23,19 +23,8 @@ def load_postgres_data(query: str):
     f"postgresql+psycopg2://{user}:{password}@{host}:{port}/{dbname}"
     )
 
-    # seed_query = "SELECT chapter_id, seed_money FROM invest_chapter ;"
-    # user_query = "SELECT user_id, sex, age FROM users;"
-
-    # seed_df = pd.read_sql(seed_query, conn)
-    # user_df = pd.read_sql(user_query, conn)
-
     df = pd.read_sql(query, engine)
 
     df.columns = [snake_to_camel(col) for col in df.columns]
-    # seed_df.rename(columns={'chapter_id': 'chapterId'}, inplace=True)
-    # seed_df.rename(columns={'seed_money': 'seedMoney'}, inplace=True)
-    # seed_df.columns = [snake_to_camel(col) for col in seed_df.columns]
-    # user_df.columns = [snake_to_camel(col) for col in user_df.columns]
-    # user_df.rename(columns={'user_id':'userId'}, inplace=True)
 
     return df
