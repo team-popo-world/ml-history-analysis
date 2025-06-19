@@ -4,7 +4,17 @@
 import pandas as pd
 
 def bet_shares(df):
-    bet_data = df[["investSessionId", "userId", "turn","newsTag","riskLevel","numberOfShares","deltaShares", "transactionType", "beforeValue","currentValue","income"]].copy()
+    bet_data = df[["investSessionId", 
+                   "userId", 
+                   "turn",
+                   "newsTag",
+                   "riskLevel",
+                   "numberOfShares",
+                   "deltaShares", 
+                   "transactionType", 
+                   "beforeValue",
+                   "currentValue",
+                   "income"]].copy()
 
     # newsTag 발생 시 해당 종목을 구매한 경우
     bet_buy = bet_data.loc[(bet_data["newsTag"] == bet_data["riskLevel"]) & (bet_data["transactionType"]=="BUY")]

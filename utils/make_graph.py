@@ -1,7 +1,7 @@
 import pandas as pd
 from db.mongo_handler import load_mongo_data
 from db.postgres_handler import load_postgres_data
-from db.merge_df import load_df
+from db.merge_df import load_invest_df
 from utils.avg_stay_time import avg_stay_time
 from utils.tag_avg_stay_time import tag_avg_stay_time
 from utils.filtered_mean import filtered_mean
@@ -15,12 +15,12 @@ from datetime import datetime, timedelta
 def make_df_graph1(userId, filter: bool = False):
     # 평균 턴 체류시간, tag 발생 턴 평균 체류시간 + 우리아이 나이대 평균 값
     cols = ["investSessionId", 
-            "childId", # 배포 끝나면 userId로 바꾸기
+            "userId",
             "turn", 
             "startedAt", 
             "endedAt",
             "newsTag"]
-    df = load_df(cols, "invest", False)
+    df = load_invest_df(cols, "invest", False)
 
     if filter:
         filter_date(df)
@@ -39,21 +39,20 @@ def make_df_graph1(userId, filter: bool = False):
 def make_df_graph2_1(userId, filter: bool = False):
     # 종목별 구매 비율 영역 그래프
     cols = ["investSessionId", 
-            "childId", # 배포 끝나면 userId로 바꾸기
+            "userId",
             "turn", 
             "riskLevel", 
             "numberOfShares", 
             "startedAt",
             "deltaShares"]
-    df = load_df(cols, "invest", False)
+    df = load_invest_df(cols, "invest", False)
 
     if filter:
         filter_date(df)
 
     df = avg_buy_ratio(df)
     df = filtered_mean(df, ["highBuyRatio", "midBuyRatio", "lowBuyRatio"], userId)
-    # df = df.loc[df["userId"] == userId, ["userId","investSessionId","highBuyRatio","midBuyRatio","lowBuyRatio"]]
-
+   
     df.drop(columns="investSessionId", inplace=True)
 
     return df
@@ -61,20 +60,19 @@ def make_df_graph2_1(userId, filter: bool = False):
 def make_df_graph2_2(userId, filter: bool = False):
     # 종목별 판매 비율 영역 그래프
     cols = ["investSessionId", 
-            "childId", # 배포 끝나면 userId로 바꾸기
+            "userId", 
             "turn", 
             "riskLevel", 
             "numberOfShares", 
             "startedAt",
             "deltaShares"]
-    df = load_df(cols, "invest", False)
+    df = load_invest_df(cols, "invest", False)
 
     if filter:
         filter_date(df)
     
     df = avg_sell_ratio(df)
     df = filtered_mean(df, ["highSellRatio", "midSellRatio", "lowSellRatio"], userId)
-    # df = df.loc[df["userId"] == userId, ["userId","investSessionId","highSellRatio","midSellRatio","lowSellRatio"]]
     
     df.drop(columns="investSessionId", inplace=True)
 
@@ -83,13 +81,13 @@ def make_df_graph2_2(userId, filter: bool = False):
 def make_df_graph2_3(userId, filter: bool = False):
     # 종목별 판매/구매 비율 누적 막대 그래프 vs 우리아이 나이대 평균
     cols = ["investSessionId", 
-            "childId", # 배포 끝나면 userId로 바꾸기
+            "userId", 
             "turn", 
             "riskLevel", 
             "numberOfShares", 
             "startedAt",
             "deltaShares"]
-    df = load_df(cols, "invest", False)
+    df = load_invest_df(cols, "invest", False)
 
     if filter:
         filter_date(df)
@@ -102,9 +100,15 @@ def make_df_graph2_3(userId, filter: bool = False):
     Buy = ["highBuyRatio","midBuyRatio","lowBuyRatio"]
 
     all_types = [("Sell", Sell), ("Buy", Buy)]
-    
+
     # 우리 아이랑 같은 나이를 갖는 행만 필터링
-    child_age = df.loc[df["childId"]==userId, "age"].iloc[0] 
+    age_series = df.loc[df["userId"] == userId, "age"]
+
+    if age_series.empty:
+        raise ValueError(f"userId '{userId}'에 해당하는 행이 없습니다.")
+
+    child_age = age_series.iloc[0]
+    # child_age = df.loc[df["userId"]==userId, "age"].iloc[0] 
     df = df[df["age"] == child_age].copy()
     for label, col_list in all_types:
         for col in col_list:
@@ -114,6 +118,8 @@ def make_df_graph2_3(userId, filter: bool = False):
             df[f'{new_col}_age'] = col_mean
         df['Type'] = label
 
+    print(df.columns)
+    
     # 우리아이 평균
     filtered_df = df[df["userId"] == userId]
 
@@ -121,17 +127,19 @@ def make_df_graph2_3(userId, filter: bool = False):
         for col in col_list:
             my_mean = filtered_df[f"{col}"].mean()
             new_col = col.replace(label, "")
-            filtered_df[f'My{col}Mean'] = my_mean
+            filtered_df[f'My{new_col}Mean'] = my_mean
         filtered_df['Type'] = label
 
+    print(filtered_df.columns)
+
     # age drop
-    filtered_df.drop(columns=["investSessionId", "age"], inplace=True)
+    filtered_df.drop(columns=["investSessionId", "age", "highSellRatio","midSellRatio","lowSellRatio", "highBuyRatio","midBuyRatio","lowBuyRatio"], inplace=True)
     
     return filtered_df
 
 def make_df_graph3(userId, filter: bool = False):
     cols = ["investSessionId",
-            "childId", # 배포 끝나면 userId로 바꾸기
+            "userId", 
             "turn",
             "newsTag",
             "riskLevel",
@@ -140,7 +148,7 @@ def make_df_graph3(userId, filter: bool = False):
             "numberOfShares",
             "startedAt", 
             "transactionType"]
-    df = load_df(cols, "invest", False)
+    df = load_invest_df(cols, "invest", False)
 
     if filter:
         filter_date(df)
@@ -158,13 +166,13 @@ def make_df_graph3(userId, filter: bool = False):
 
 def make_df_graph4(userId, filter: bool = False):
     cols = ['investSessionId', 
-            'childId', # 배포 끝나면 userId로 바꾸기
+            'userId',
             'seedMoney',
             'chapterId',
             'turn',
             "startedAt",
             'currentPoint']
-    df = load_df(cols, "invest", True)
+    df = load_invest_df(cols, "invest", True)
 
     if filter:
         filter_date(df)

@@ -13,9 +13,6 @@ collection_map = {
 
 # 불러온 mongoDB 전처리
 def mongo_preprocess(df):
-    if 'childId' in df.columns:
-        df.rename(columns={'childId': 'userId'}, inplace=True)
-
     if 'userId' in df.columns:
         df['userId'] = df['userId'].astype(str)
 
