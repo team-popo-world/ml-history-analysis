@@ -5,6 +5,6 @@ from routers.graph import graph1_all, graph1_week, graph2_1_all, graph2_1_week, 
 # one_all = graph1_all("956f51a8-d6a0-4a12-a22b-9da3cdffc879") # success
 # two_one_all = graph2_1_all("956f51a8-d6a0-4a12-a22b-9da3cdffc879") # success
 # two_two_all = graph2_2_all("956f51a8-d6a0-4a12-a22b-9da3cdffc879") # success
-two_three_all = graph2_3_all("237aac1b-4d6f-4ca9-9e4f-30719ea5967d") # ...(later)
+# two_three_all = graph2_3_all("237aac1b-4d6f-4ca9-9e4f-30719ea5967d") # ...(later)
 # three = graph3_all("956f51a8-d6a0-4a12-a22b-9da3cdffc879") # success
 # four = graph4_all("956f51a8-d6a0-4a12-a22b-9da3cdffc879") # success
