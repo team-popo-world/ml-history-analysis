@@ -14,7 +14,6 @@ from utils.bet_shares import bet_shares
 #from models.preprocessing.userId_drop import userId_drop
 from models.preprocessing.label_encoder import label_encoder
 
-
 # 데이터 불러오기
 mongo_df = load_mongo_data(None, "invest_dummy")
 
@@ -72,7 +71,7 @@ merged2 = merged.merge(userInfo, on='userId', how="inner")
 fin_df = merged2.merge(scenarioInfo, on="investSessionId", how="inner")
 
 # investSessionId drop
-df = fin_df.deop("investSessionId", axis=1)
+df = fin_df.drop("investSessionId", axis=1)
 
 # 레이블 인코딩
 df = label_encoder(fin_df, ["userId",""])
